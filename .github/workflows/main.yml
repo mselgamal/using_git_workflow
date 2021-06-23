@@ -1,0 +1,16 @@
+name: release-please
+on:
+   push:
+      branches:
+         - main
+
+jobs:
+   release-please:
+      runs-on: ubuntu-latest
+      steps:
+         - uses: GoogleCloudPlatform/release-please-action@v2
+           with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            release-type: python
+            version-file: "./app/version.py"
+            package-name: release-please-action
