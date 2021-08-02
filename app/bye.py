@@ -3,4 +3,4 @@ class ByeWorld:
         pass
 
     def __repr__(self) -> str:
-        return "Bye World"
+        return "Bye new World"
