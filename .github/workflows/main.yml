@@ -1,16 +1,13 @@
 name: release-please
-on:
-   push:
-      branches:
-         - develop
+on: [push, pull_request]
 
 jobs:
-   release-please:
+  run-shell-cmd:
       runs-on: ubuntu-latest
       steps:
-         - uses: GoogleCloudPlatform/release-please-action@v2
-           with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            release-type: python
-            version-file: "./app/version.py"
-            package-name: release-please-action
+        - name: echo a string
+          run: echo "Hello world"
+        - name: multiline
+          run: |
+            node -v
+            npm -v
