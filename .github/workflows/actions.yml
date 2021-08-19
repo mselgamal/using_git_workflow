@@ -1,19 +1,38 @@
-
-name: Actions Workflow
+name: Build Image
 
 on: push
 
 jobs:
-  run-github-actions:
+  build-kp-image:
     runs-on: ubuntu-latest
     steps:
-      - name: list files
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Use Cached Build Files
+        uses: actions/cache@v2
+        id: cache-build-output
+        with:
+          path: build_output
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+      - name: Create Build Files
+        if: steps.cache-build-output.outputs.cache-hit != 'true'
         run: |
-          pwd
-          ls -a
-      - name: checkout
-        uses: actions/checkout@v1
-      - name: list files after checkout
+          echo "No Cache found"
+          echo "Making build files"
+          mkdir build_output
+      - name: Cleanup Some Cached Files
+        if: steps.cache-build-output.outputs.cache-hit == 'true'
         run: |
-          pwd
-          ls -a
+          echo "Cache found"
+          echo "cleaning up build files"
+      - name: Install Packages
+        run: |
+          sudo apt update
+          sudo apt install -y binutils g++ gcc patch gzip bzip2 perl make build-essential libncurses-dev file curl wget cpio python unzip rsync bc git tar sed bash
+      - name: Build Stuff
+        run: |
+          touch build_output/my_build_1.txt
+      - name: Show Build Files
+        run: |
+          cd build_output
+          ls -al
