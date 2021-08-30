@@ -9,6 +9,6 @@ jobs:
       - name: hello
         run: |
           echo "actions: ${GITHUB_ACTIONS}"
-          echo "actor: ${GITHUB_ACTOR}""
+          echo "actor: ${GITHUB_ACTOR}"
           echo "ref: ${GITHUB_SHA}"
           echo "ref: ${GITHUB_REF}"
