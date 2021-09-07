@@ -12,3 +12,4 @@ jobs:
           echo "actor: ${GITHUB_ACTOR}"
           echo "ref: ${GITHUB_SHA}"
           echo "ref: ${GITHUB_REF}"
+          echo "ref: ${GITHUB_HEAD_REF}"
