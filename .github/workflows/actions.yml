@@ -1,6 +1,6 @@
 name: Print Env
 
-on: push
+on: [push, pull_request]
 
 jobs: 
   print-env:
